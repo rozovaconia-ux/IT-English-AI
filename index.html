@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT English AI</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:#f4f6fb;color:#182033}
+.app{display:flex;min-height:100vh}.side{width:250px;background:#171b2e;color:#fff;padding:24px 16px}.logo{font-size:23px;font-weight:800;margin-bottom:7px}.sub{font-size:12px;color:#aeb5cc;margin-bottom:28px}
+.nav button{width:100%;text-align:left;background:transparent;color:#dfe3f2;border:0;padding:13px 14px;border-radius:10px;margin:3px 0;cursor:pointer;font-size:14px}.nav button:hover,.nav button.active{background:#303654;color:#fff}
+.main{flex:1;padding:32px;max-width:1200px;margin:auto;width:100%}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.top h1{margin:0;font-size:28px}.badge{background:#e6e9ff;color:#4a54c7;padding:8px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.page{display:none}.page.active{display:block}.hero{background:linear-gradient(135deg,#5964e8,#7c55c9);color:#fff;border-radius:20px;padding:28px;margin-bottom:20px}.hero h2{margin:0 0 8px;font-size:25px}.hero p{margin:0;color:#e8eaff}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}.card{background:#fff;border:1px solid #e5e8f1;border-radius:16px;padding:20px;box-shadow:0 5px 18px rgba(28,37,66,.05)}.card h3{margin:8px 0}.icon{font-size:28px}.muted{color:#687089;font-size:13px;line-height:1.5}
+.btn{background:#5964e8;color:#fff;border:0;border-radius:10px;padding:11px 16px;cursor:pointer;font-weight:700}.btn.secondary{background:#eef0f8;color:#343b58}.btn:active{transform:scale(.98)}
+.panel{background:#fff;border:1px solid #e5e8f1;border-radius:16px;padding:22px;margin-top:16px}.input, textarea, select{width:100%;padding:12px;border:1px solid #d9deea;border-radius:10px;font:inherit;margin:8px 0 14px}textarea{min-height:130px;resize:vertical}
+.word{font-size:34px;font-weight:800;margin:8px 0}.translation{font-size:18px;color:#5964e8;margin-bottom:10px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{background:#eef0f8;border-radius:20px;padding:8px 11px;font-size:13px}
+.chat{height:320px;overflow:auto;background:#f7f8fc;border-radius:12px;padding:14px;margin-bottom:12px}.msg{padding:10px 12px;border-radius:12px;margin:8px 0;max-width:80%;line-height:1.45}.ai{background:#e8eaff}.user{background:#5964e8;color:#fff;margin-left:auto}.row{display:flex;gap:8px}.row .input{margin:0}.result{background:#f0f7f2;border-left:4px solid #4aa06b;padding:14px;border-radius:8px;margin-top:10px}
+.option{display:block;width:100%;padding:12px;text-align:left;background:#f7f8fc;border:1px solid #dde1ec;border-radius:10px;margin:8px 0;cursor:pointer}.option:hover{background:#eef0ff}
+@media(max-width:720px){.side{width:190px}.main{padding:20px}.top h1{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+<div class="logo">IT English AI</div><div class="sub">Виртуальный помощник для IT-студентов</div>
+<div class="nav">
+<button class="active" onclick="show('home',this)">⌂ Главная</button>
+<button onclick="show('vocab',this)">▣ IT-слова</button>
+<button onclick="show('grammar',this)">✓ Грамматика</button>
+<button onclick="show('text',this)">✎ Проверка текста</button>
+<button onclick="show('interview',this)">◉ Собеседование</button>
+<button onclick="show('chat',this)">◌ Чат с ИИ</button>
+</div>
+</aside>
+<main class="main">
+<div class="top"><h1 id="title">IT English AI</h1><div class="badge">AI STUDY ASSISTANT</div></div>
+
+<section id="home" class="page active">
+<div class="hero"><h2>Изучай английский для IT вместе с ИИ</h2><p>Термины, грамматика, технические тексты и собеседования — в одном помощнике.</p></div>
+<div class="cards">
+<div class="card"><div class="icon">💻</div><h3>IT-слова</h3><p class="muted">Учите профессиональную лексику разработчика.</p><button class="btn" onclick="show('vocab')">Начать</button></div>
+<div class="card"><div class="icon">📝</div><h3>Проверка текста</h3><p class="muted">Получайте исправления и объяснения ошибок.</p><button class="btn" onclick="show('text')">Проверить</button></div>
+<div class="card"><div class="icon">🎤</div><h3>Собеседование</h3><p class="muted">Потренируйте ответы на английском.</p><button class="btn" onclick="show('interview')">Тренироваться</button></div>
+<div class="card"><div class="icon">🤖</div><h3>Чат с ИИ</h3><p class="muted">Задавайте вопросы по английскому и IT.</p><button class="btn" onclick="show('chat')">Открыть</button></div>
+</div>
+<div class="panel"><b>Цель помощника</b><p class="muted">Повысить эффективность изучения иностранного языка за счёт персонализированной практики и применения нейросетевых технологий.</p></div>
+</section>
+
+<section id="vocab" class="page">
+<div class="panel"><h2>IT-словарь</h2><p class="muted">Нажмите «Следующее слово», чтобы тренироваться.</p>
+<div class="word" id="word">debugging</div><div class="translation" id="translation">отладка</div><p id="example">The developer is debugging the application.</p>
+<button class="btn" onclick="nextWord()">Следующее слово</button>
+</div>
+<div class="panel"><b>Тематические слова</b><div class="chips" id="chips"></div></div>
+</section>
+
+<section id="grammar" class="page">
+<div class="panel"><h2>Грамматическая тренировка</h2><p id="q" class="word" style="font-size:22px"></p><div id="opts"></div><div id="gresult"></div></div>
+</section>
+
+<section id="text" class="page">
+<div class="panel"><h2>Проверка английского текста</h2><p class="muted">Введите небольшой текст. Помощник найдёт типичные ошибки и предложит улучшенный вариант.</p>
+<textarea id="textin" placeholder="Например: I am developer and I work with databases."></textarea>
+<button class="btn" onclick="checkText()">Проверить текст</button><div id="textresult"></div></div>
+</section>
+
+<section id="interview" class="page">
+<div class="panel"><h2>IT-собеседование</h2><p id="iq" class="word" style="font-size:22px">Tell me about yourself and your programming skills.</p>
+<textarea id="answer" placeholder="Напишите свой ответ на английском..."></textarea><button class="btn" onclick="evaluateAnswer()">Получить обратную связь</button><div id="iresult"></div></div>
+</section>
+
+<section id="chat" class="page">
+<div class="panel"><h2>Чат с ИИ</h2><div class="chat" id="chatbox"><div class="msg ai">Hello! I’m IT English AI. Ask me about English or IT vocabulary.</div></div>
+<div class="row"><input class="input" id="chatin" placeholder="Напишите вопрос..." onkeydown="if(event.key==='Enter')sendChat()"><button class="btn" onclick="sendChat()">Отправить</button></div></div>
+</section>
+</main></div>
+<script>
+const words=[
+['debugging','отладка','The developer is debugging the application.'],
+['database','база данных','The application stores information in a database.'],
+['framework','фреймворк','This framework helps developers build web applications.'],
+['deployment','развёртывание','The team is preparing the deployment.'],
+['algorithm','алгоритм','The algorithm processes the data quickly.'],
+['repository','репозиторий','The code is stored in a repository.'],
+['interface','интерфейс','The user interface is easy to understand.'],
+['developer','разработчик','She works as a software developer.'],
+['bug','ошибка в программе','We found a bug in the application.'],
+['requirement','требование','The client described the project requirements.']
+];
+let wi=0;
+function nextWord(){wi=(wi+1)%words.length; document.getElementById('word').textContent=words[wi][0];document.getElementById('translation').textContent=words[wi][1];document.getElementById('example').textContent=words[wi][2]}
+document.getElementById('chips').innerHTML=words.map(w=>`<span class="chip">${w[0]} — ${w[1]}</span>`).join('');
+
+const grammar=[
+['She ___ a software developer.',['is','are','am'],'is'],
+['They ___ working on a new application.',['is','are','am'],'are'],
+['I ___ learning English for IT.',['is','are','am'],'am'],
+['He ___ debugging the code now.',['is','are','am'],'is']
+];
+let gi=0;
+function grammarQ(){let x=grammar[gi];document.getElementById('q').textContent=x[0];document.getElementById('opts').innerHTML=x[1].map(o=>`<button class="option" onclick="answerGrammar('${o}')">${o}</button>`).join('');document.getElementById('gresult').innerHTML=''}
+function answerGrammar(o){let ok=o===grammar[gi][2];document.getElementById('gresult').innerHTML=`<div class="${ok?'result':''}" style="${ok?'':'background:#fff2f2;border-left:4px solid #d65c5c;padding:14px;border-radius:8px'}">${ok?'✓ Правильно!':'✗ Правильный ответ: '+grammar[gi][2]}</div>`;setTimeout(()=>{gi=(gi+1)%grammar.length;grammarQ()},900)}
+grammarQ();
+
+function checkText(){
+let t=document.getElementById('textin').value.trim(); if(!t){document.getElementById('textresult').innerHTML='<div class="result">Введите текст для проверки.</div>';return}
+let r=t, notes=[];
+if(/\bI am developer\b/i.test(r)){r=r.replace(/\bI am developer\b/gi,'I am a developer');notes.push('Перед профессией в единственном числе нужен артикль: a developer.')}
+if(/\bHe work\b/i.test(r)){r=r.replace(/\bHe work\b/gi,'He works');notes.push('После he/she/it в Present Simple добавляется -s.')}
+if(/\bI has\b/i.test(r)){r=r.replace(/\bI has\b/gi,'I have');notes.push('С I используется have, а не has.')}
+if(!notes.length)notes.push('Явных типичных ошибок в демонстрационной проверке не найдено. Для полной проверки можно подключить API языковой нейросети.');
+document.getElementById('textresult').innerHTML='<div class="result"><b>Предложенный вариант:</b><br>'+r+'<br><br><b>Комментарий:</b><ul>'+notes.map(n=>'<li>'+n+'</li>').join('')+'</ul></div>';
+}
+
+function evaluateAnswer(){
+let t=document.getElementById('answer').value.trim();if(!t){document.getElementById('iresult').innerHTML='<div class="result">Напишите ответ.</div>';return}
+let tips=[];if(t.length<45)tips.push('Попробуйте добавить 1–2 предложения о своих навыках или учебных проектах.');if(!/\b(I|my|I’m|I am)\b/i.test(t))tips.push('Добавьте информацию о себе, используя I / my.');if(!/\b(develop|program|code|software|IT)\w*/i.test(t))tips.push('Упомяните хотя бы один профессиональный навык или IT-направление.');if(!tips.length)tips.push('Ответ выглядит содержательным. Для реальной оценки можно подключить языковую нейросеть.');
+document.getElementById('iresult').innerHTML='<div class="result"><b>Обратная связь:</b><ul>'+tips.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>';
+}
+
+function sendChat(){
+let inp=document.getElementById('chatin'),t=inp.value.trim();if(!t)return;let box=document.getElementById('chatbox');box.innerHTML+=`<div class="msg user">${t}</div>`;
+let low=t.toLowerCase(),a='I can help you practise English for IT. Try asking about a term, grammar, or an interview.';
+if(low.includes('database'))a='<b>Database</b> means «база данных». Example: The application stores user data in a database.';
+else if(low.includes('developer'))a='<b>Developer</b> means «разработчик». Example: A software developer writes and maintains code.';
+else if(low.includes('grammar')||low.includes('граммат'))a='Try the Grammar section. It contains short exercises with instant feedback.';
+else if(low.includes('interview')||low.includes('собесед'))a='Open the Interview section and practise answering questions in English.';
+box.innerHTML+=`<div class="msg ai">${a}</div>`;box.scrollTop=box.scrollHeight;inp.value='';
+}
+function show(id,btn){
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');
+document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');
+let names={home:'IT English AI',vocab:'IT-слова',grammar:'Грамматика',text:'Проверка текста',interview:'Собеседование',chat:'Чат с ИИ'};document.getElementById('title').textContent=names[id];
+}
+</script>
+</body>
+</html>
